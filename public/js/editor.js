@@ -1,5 +1,3 @@
- // Import the functions you need from the SDKs you need
-
 const blogTitleField = document.querySelector('.title');
 const articleFeild = document.querySelector('.article');
 
@@ -7,9 +5,9 @@ const articleFeild = document.querySelector('.article');
 const bannerImage = document.querySelector('#banner-upload');
 const banner = document.querySelector(".banner");
 let bannerPath;
+
 const publishBtn = document.querySelector('.publish-btn');
 const uploadInput = document.querySelector('#image-upload');
-
 
 bannerImage.addEventListener('change', () => {
     uploadImage(bannerImage, "banner");
@@ -18,48 +16,35 @@ bannerImage.addEventListener('change', () => {
 uploadInput.addEventListener('change', () => {
     uploadImage(uploadInput, "image");
 })
-// =================================================
 
-const addImage = (imagePath, alt)=>{
-    let curPos = articleFeild.selectionstart;
-    let textToInsert = `\r![${alt}](${imagePath})\r`;
-    articleFeild.value = articleFeild.value.slice(0, curPos) + textToInsert + articleFeild.value.slice(curPos);
-}
-
-
-// =======================================
 const uploadImage = (uploadFile, uploadType) => {
     const [file] = uploadFile.files;
-    if (file && file.type.includes("image")) {
+    if(file && file.type.includes("image")){
         const formdata = new FormData();
         formdata.append('image', file);
 
         fetch('/upload', {
-            method: 'POST',
+            method: 'post',
             body: formdata
-        })
-        .then(res => {
-            if (!res.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return res.json();
-        })
+        }).then(res => res.json())
         .then(data => {
-            if (uploadType === "image") {
+            if(uploadType == "image"){
                 addImage(data, file.name);
-            } else {
+            } else{
                 bannerPath = `${location.origin}/${data}`;
                 banner.style.backgroundImage = `url("${bannerPath}")`;
             }
         })
-        .catch(error => {
-            console.error('Error:', error);
-            // Handle or log the error accordingly
-        });
-    } else {
-        alert("Upload image only");
+    } else{
+        alert("upload Image only");
     }
-};
+}
+
+const addImage = (imagepath, alt) => {
+    let curPos = articleFeild.selectionStart;
+    let textToInsert = `\r![${alt}](${imagepath})\r`;
+    articleFeild.value = articleFeild.value.slice(0, curPos) + textToInsert + articleFeild.value.slice(curPos);
+}
 
 let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
