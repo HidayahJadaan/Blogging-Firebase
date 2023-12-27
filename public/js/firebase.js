@@ -1,13 +1,16 @@
+// Firebase configuration object containing credentials and settings
 let firebaseConfig = {
-    apiKey: "AIzaSyAGZiNfPq3jTCcyG5e49T9R6JLl_TVtpK0",
-    authDomain: "blogging-website-4ec0e.firebaseapp.com",
-    projectId: "blogging-website-4ec0e",
-    storageBucket: "blogging-website-4ec0e.appspot.com",
-    messagingSenderId: "22378772154",
-    appId: "1:22378772154:web:82e7e59a4792ccb7a8b483",
-    measurementId: "G-GX9506BC0C"
+    apiKey: "YOUR_API_KEY", // API key for authentication
+    authDomain: "YOUR_AUTH_DOMAIN", // Domain for authentication
+    projectId: "YOUR_PROJECT_ID", // ID of the Firebase project
+    storageBucket: "YOUR_STORAGE_BUCKET", // Storage bucket for file storage
+    messagingSenderId: "YOUR_SENDER_ID", // Sender ID for messaging
+    appId: "YOUR_APP_ID", // Application ID
+    measurementId: "YOUR_MEASUREMENT_ID" // Measurement ID for analytics
 };
 
+// Initialize Firebase with the provided configuration
 firebase.initializeApp(firebaseConfig);
 
+// Access Firestore database from Firebase
 let db = firebase.firestore();
